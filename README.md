@@ -95,17 +95,17 @@ If only one account is found, the switcher is hidden and the plugin uses it dire
 
 ## Troubleshooting
 
-| Problem                                             | Solution                                                                                                           |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
-| "Credentials not found"                             | Run `claude` to authenticate with Claude Code first                                                                |
-| "Keychain is locked"                                | Run `security unlock-keychain ~/Library/Keychains/login.keychain-db`                                               |
-| "Token expired and refresh failed"                  | The plugin runs `claude` CLI to refresh automatically. If this fails, re-authenticate manually by running `claude` |
+| Problem                                             | Solution                                                                                                                                  |
+| --------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| "Credentials not found"                             | Run `claude` to authenticate with Claude Code first                                                                                       |
+| "Keychain is locked"                                | Run `security unlock-keychain ~/Library/Keychains/login.keychain-db`                                                                      |
+| "Token expired and refresh failed"                  | The plugin runs `claude` CLI to refresh automatically. If this fails, re-authenticate manually by running `claude`                        |
 | Not working on Linux/Windows                        | Ensure `~/.claude/.credentials.json` exists (or `$CLAUDE_CONFIG_DIR/.credentials.json` if that env var is set). Run `claude` to create it |
-| Keychain access denied                              | Grant access when macOS prompts you                                                                                |
-| Keychain read timed out                             | Restart Keychain Access (can happen on macOS Tahoe)                                                                |
-| "Credentials are unavailable or expired"            | Run `claude` to refresh your Claude Code credentials                                                               |
-| "Extra usage is required for long context requests" | Your plan doesn't cover long context extra usage. See [Long context (1M)](#long-context-1m) below                  |
-| Plugin not updating to latest version               | Delete the cached package: `rm -rf ~/.cache/opencode/packages/opencode-claude-auth@latest/` then restart OpenCode  |
+| Keychain access denied                              | Grant access when macOS prompts you                                                                                                       |
+| Keychain read timed out                             | Restart Keychain Access (can happen on macOS Tahoe)                                                                                       |
+| "Credentials are unavailable or expired"            | Run `claude` to refresh your Claude Code credentials                                                                                      |
+| "Extra usage is required for long context requests" | Your conversation exceeded 200k tokens. See [Long context (1M)](#long-context-1m) below                                                   |
+| Plugin not updating to latest version               | Delete the cached package: `rm -rf ~/.cache/opencode/packages/opencode-claude-auth@latest/` then restart OpenCode                         |
 
 ### Diagnostic logging
 
@@ -156,7 +156,7 @@ All configurable parameters can be overridden via environment variables. If Anth
 | `ANTHROPIC_USER_AGENT`              | Full User-Agent string (overrides CLI version)                                                                                                                                         | `claude-cli/{version} (external, cli)`                                                                  |
 | `ANTHROPIC_BETA_FLAGS`              | Comma-separated beta feature flags                                                                                                                                                     | `claude-code-20250219,oauth-2025-04-20,interleaved-thinking-2025-05-14,prompt-caching-scope-2026-01-05` |
 | `CLAUDE_AUTH_DEBUG`                 | Enable diagnostic logging (`1` for default path, or a custom file path)                                                                                                                | disabled                                                                                                |
-| `CLAUDE_CONFIG_DIR`                 | Claude Code config directory used for the credentials-file fallback (reads `$CLAUDE_CONFIG_DIR/.credentials.json`). macOS still checks the Keychain first.                              | `~/.claude`                                                                                             |
+| `CLAUDE_CONFIG_DIR`                 | Claude Code config directory used for the credentials-file fallback (reads `$CLAUDE_CONFIG_DIR/.credentials.json`). macOS still checks the Keychain first.                             | `~/.claude`                                                                                             |
 | `OPENCODE_CLAUDE_AUTH_MAX_RETRY_MS` | Max ms the plugin waits when honouring a 429/529 `retry-after` header. Beyond this cap the response surfaces immediately so OpenCode doesn't appear to hang on hour-long quota resets. | `30000`                                                                                                 |
 
 Example:
